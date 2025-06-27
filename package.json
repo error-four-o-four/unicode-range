@@ -1,0 +1,21 @@
+{
+  "name": "@http404/unicode-range",
+  "version": "0.0.1",
+  "description": "Unicode-range parser/builder",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "css",
+    "font-face",
+    "unicode",
+    "unicode-range"
+  ],
+  "license": "MIT",
+  "author": "error-four-o-four",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^24.0.4",
+    "typescript": "^5.8.3"
+  }
+}
