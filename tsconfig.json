@@ -1,8 +1,12 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "module": "nodenext",
+    "module": "node18",
     "lib": ["esnext"],
+    "moduleResolution": "node16",
+
+    "allowJs": true,
+    "resolveJsonModule": true,
 
 		"declaration": true,
     // "declarationMap": true,
@@ -29,7 +33,6 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
 
-    "moduleResolution": "nodenext",
     // "baseUrl": "./",
     // "paths": {},
   	"types": ["node"],

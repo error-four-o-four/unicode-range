@@ -20,6 +20,10 @@ npm i @http404/unicode-range
 yarn add @http404/unicode-range
 ```
 
+> [!IMPORTANT]  
+> This package is ESM-only. It cannot be require()'d from CommonJS. [Read More](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c)
+
+
 <!--
 
 ## Usage
