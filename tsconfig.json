@@ -41,6 +41,8 @@
   },
   "include": [
     "src/**/*.ts",
-    "*.config.js"
+    "test/**/*.ts",
+    "*.config.js",
+    "*.config.ts"
   ]
 }
