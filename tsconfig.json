@@ -8,18 +8,6 @@
     "allowJs": true,
     "resolveJsonModule": true,
 
-		"declaration": true,
-    // "declarationMap": true,
-    // "sourceMap": true,
-    // "outFile": "./",
-    "outDir": "./dist",
-    // "rootDir": "./",
-    // "composite": true,
-    // "removeComments": true,
-    // "noEmit": true,
-    // "importHelpers": true,
-    // "isolatedModules": true,
-
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -33,8 +21,11 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
 
-    // "baseUrl": "./",
-    // "paths": {},
+    "outDir": "./.dist",
+		"declaration": true,
+    "removeComments": true,
+
+    "paths": {},
   	"types": ["node"],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true
@@ -44,5 +35,9 @@
     "test/**/*.ts",
     "*.config.js",
     "*.config.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".dist"
   ]
 }

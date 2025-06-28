@@ -15,11 +15,28 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
-    }
+    },
+    "./parse": {
+      "types": "./dist/parse.d.ts",
+      "import": "./dist/parse.js"
+    },
+    "./stringify": {
+      "types": "./dist/stringify.d.ts",
+      "import": "./dist/stringify.js"
+    },
+    "./validate": {
+      "types": "./dist/validate.d.ts",
+      "import": "./dist/validate.js"
+    },
+    "./package.json": "./package.json"
   },
+  "files": [
+    "dist",
+    "package.json"
+  ],
   "scripts": {
     "prebuild": "npm run clean",
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsc -p tsconfig.build.json && rollup -c",
     "clean": "node -e \"fs.rmSync('./dist', { recursive: true, force: true })\"",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
@@ -36,6 +53,8 @@
     "@types/node": "^24.0.4",
     "eslint": "^9.29.0",
     "globals": "^16.2.0",
+    "rollup": "^4.44.1",
+    "rollup-plugin-dts": "^6.2.1",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.35.0",
     "vitest": "3.2.4"
