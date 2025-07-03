@@ -1,24 +1,22 @@
-// https://github.com/Japont/unicode-range
-// https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range
-// https://drafts.csswg.org/css-fonts-4/#unicode-range-desc
-
 import {
-  parseUnicodeRangeSync,
-  parseUnicodeRangeSafeSync,
+  parseUnicodeRange,
+  parseUnicodeRangeSafe,
 } from './parse.js';
 
-import {
-  stringify,
-} from './stringify.js';
+import { stringify } from './stringify.js';
+
+import { isValidUnicodeRange } from './validate.js';
 
 export {
-  parseUnicodeRangeSync,
-  parseUnicodeRangeSafeSync,
+  isValidUnicodeRange,
+  parseUnicodeRange,
+  parseUnicodeRangeSafe,
   stringify,
 };
 
 export default {
-  parseSync: parseUnicodeRangeSync,
-  parseSafeSync: parseUnicodeRangeSafeSync,
+  parse: parseUnicodeRange,
+  parseSafe: parseUnicodeRangeSafe,
   stringify,
+  validate: isValidUnicodeRange,
 };
