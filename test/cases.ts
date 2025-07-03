@@ -136,7 +136,7 @@ export const invalidCases = {
       'U+??????',
     ],
   },
-  intaerval: {
+  interval: {
     name: 'invalid intervals',
     samples: [
       'U+00FF-0099',

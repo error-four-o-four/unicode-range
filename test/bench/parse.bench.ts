@@ -1,112 +1,125 @@
-import { bench, describe } from 'vitest';
+import { fileURLToPath } from 'node:url';
+import { writeFile } from 'node:fs/promises';
+import { relative } from 'node:path';
 
 import { UnicodeRange } from '@japont/unicode-range';
 
-import {
-  // parseUnicodeRangeAggregated,
-  // parseUnicodeRangeValue,
-  parseUnicodeRangeValueSync,
-  // parseUnicodeRange,
-  parseUnicodeRangeSync,
-} from '../../src/index.js';
+import { parseUnicodeRange } from '../../src/parse.js';
 
-const options = {
-  time: 2000,
-};
+import {
+  createBench,
+  createCustomResult,
+} from '../bench.utils.js';
+
+import type {
+  CustomSample,
+  CustomResult,
+} from '../bench.utils.js';
 
 const japont = '@japont';
 const http404 = '@http404';
-// const subpath = 'unicode-range';
 
-describe.concurrent(`compare '${japont}' and '${http404}'`, () => {
-  describe('single codepoint', () => {
-    const value = 'U+10ABCD';
+const benchmarks = {
+  single: {
+    values: ([
+      ['single codepoint', 'U+10ABCD', 1000],
+      ['wildcard range', 'U+10????'],
+      ['interval range', 'U+10ABCD-10FFFF'],
+    ] as CustomSample[]),
+    results: ([] as CustomResult[]),
+    async runner(
+      name: string,
+      value: string,
+      time = 2500,
+    ) {
+      const bench = createBench(name, time);
 
-    bench(
-      `${japont} UnicodeRange.parse '${value}'`,
-      () => void UnicodeRange.parse([value]),
-      options,
-    );
+      bench.add(
+        `${japont} UnicodeRange.parse([value]);`,
+        () => void UnicodeRange.parse([value]),
+      );
 
-    bench(
-      `${http404} parseUnicodeRangeValueSync '${value}'`,
-      () => void parseUnicodeRangeValueSync(value),
-      options,
-    );
+      bench.add(
+        `${http404} parseUnicodeRange(value);`,
+        () => void parseUnicodeRange(value),
+      );
 
-    // bench(
-    //   `${http404} parseUnicodeRangeValue '${value}'`,
-    //   async () => void await parseUnicodeRangeValue(value),
-    //   options,
-    // );
-  });
+      await bench.run();
 
-  describe('wildcard range', () => {
-    const value = 'U+10????';
+      this.results.push(createCustomResult(name, value, bench));
+    },
+  },
+  multiple: {
+    values: ([
+      ['multiple single codepoints', 'U+0, U+0f'],
+      ['multiple wildcard ranges', 'u+a?, u+b??'],
+      ['multiple interval ranges', 'U+aaa-ccc, U+aacc-aadd'],
+      ['multiple mixed values', 'U+0, U+00, U+aaa-ccc, U+aacc-aadd, u+a?, u+b??'],
+    ] as CustomSample[]),
+    results: [] as CustomResult[],
+    async runner(
+      name: string,
+      value: string,
+      time = 2500,
+    ) {
+      const bench = createBench(name, time);
 
-    bench(
-      `${japont} UnicodeRange.parse '${value}'`,
-      () => void UnicodeRange.parse([value]),
-      options,
-    );
+      bench.add(
+        String.raw`${japont} UnicodeRange.parse(value.split(/,\s*/g));`,
+        () => void UnicodeRange.parse(value.split(/,\s*/g)),
+      );
 
-    bench(
-      `${http404} parseUnicodeRangeValueSync '${value}'`,
-      () => void parseUnicodeRangeValueSync(value),
-      options,
-    );
+      bench.add(
+        String.raw`${japont} value.split(/,\s*/g).map(v => UnicodeRange.parse([v]));`,
+        () => void value.split(/,\s*/g).map(v => UnicodeRange.parse([v])),
+      );
 
-    // bench(
-    //   `${http404} parseUnicodeRangeValue '${value}'`,
-    //   async () => void await parseUnicodeRangeValue(value),
-    //   options,
-    // );
-  });
+      bench.add(
+        `${http404} parseUnicodeRange(value);`,
+        () => void parseUnicodeRange(value),
+      );
 
-  describe('interval range', () => {
-    const value = 'U+10ABCD-10FFFF';
+      bench.add(
+        String.raw`${http404} value.split(/,\s*/g).map(v => parseUnicodeRange(v));`,
+        () => void value.split(/,\s*/g).map(v => parseUnicodeRange(v)),
+      );
 
-    bench(
-      `${japont} UnicodeRange.parse '${value}'`,
-      () => void UnicodeRange.parse([value]),
-      options,
-    );
+      await bench.run();
 
-    bench(
-      `${http404} parseUnicodeRangeValueSync '${value}'`,
-      () => void parseUnicodeRangeValueSync(value),
-      options,
-    );
+      this.results.push(createCustomResult(name, value, bench));
+    },
+  },
+};
 
-    // bench(
-    //   `${http404} parseUnicodeRangeValue '${value}'`,
-    //   async () => void await parseUnicodeRangeValue(value),
-    //   options,
-    // );
-  });
+console.log('Running `parse` benchmark tests ...');
 
-  describe('multiple values', () => {
-    const value = 'U+0, U+00, U+000, U+0000, U+000000, U+10ABCD-10FFFF';
+await Promise.all([
+  ...benchmarks.single.values.map(args => benchmarks.single.runner(...args)),
+  ...benchmarks.multiple.values.map(args => benchmarks.multiple.runner(...args)),
+]);
 
-    bench(
-      `${japont} UnicodeRange.parse '${value}'`,
-      () => {
-        const values = value.split(/,\s*/g);
-        UnicodeRange.parse(values);
-      },
-      options,
-    );
+const results = Object
+  .values(benchmarks)
+  .map(bench => bench.results)
+  .flat();
 
-    bench(
-      `${http404} parseUnicodeRangeSync '${value}'`,
-      () => void parseUnicodeRangeSync(value),
-      options,
-    );
+const sorted = [
+  ...benchmarks.single.values.map(sample => sample[0]),
+  ...benchmarks.multiple.values.map(sample => sample[0]),
+].reduce((all, name) => {
+  const result = results.find(result => result.name.startsWith(name));
 
-    // bench(
-    //   `${http404} parseUnicodeRange '${value}'`,
-    //   async () => void await parseUnicodeRange(value),
-    //   options,
-    // );
-  });
-});
+  if (!result) {
+    console.warn('Could not find %o', name);
+    return all;
+  };
+
+  return [
+    ...all,
+    result,
+  ];
+}, [] as CustomResult[]);
+
+const file = fileURLToPath(new URL('parse.json', import.meta.url));
+await writeFile(file, JSON.stringify(sorted, null, 2), 'utf-8');
+console.log('Written data to %o', relative(process.cwd(), file));
