@@ -1,180 +1,89 @@
 import { describe, it, expect } from 'vitest';
 
-import { UnicodeRange } from '@japont/unicode-range';
+import { validCases, invalidCases, type ValidSample } from '../cases.js';
 
-import {
-  // parseUnicodeRange,
-  parseUnicodeRangeSync,
-  parseUnicodeRangeSafeSync,
-} from '../../src/index.js';
+import { parseUnicodeRange } from '../../src/parse.js';
 
-describe('parseUnicodeRangeSync', () => {
+describe('parseUnicodeRange', () => {
   it('is a function', () => {
-    expect(parseUnicodeRangeSync).toBeTypeOf('function');
+    expect(parseUnicodeRange).toBeTypeOf('function');
   });
 
-  // it.skip('passes', () => {
-  //   const val = 'u+0';
-
-  //   const expected = UnicodeRange.parse([val]);
-  //   expect(expected).toBeDefined();
-
-  //   const result = parseUnicodeRangeSync(val);
-  //   expect(result).toBeDefined();
-
-  //   expect(result).toStrictEqual(expected);
-  // });
-
-  describe('parses single codepoints', () => {
-    it.each([
-      'U+0',
-      'U+00A9',
-      // 'U+  00A9',
-      'U+10FFFF',
-    ])('$0', (val) => {
-      const expected = UnicodeRange.parse([val]);
-      expect(expected).toBeDefined();
-
-      const result = parseUnicodeRangeSync(val);
-      expect(result).toBeDefined();
-
-      expect(result).toStrictEqual(expected);
-    });
-  });
-
-  describe('parses interval ranges', () => {
-    it.each([
-      'U+0-F',
-      'U+00A9-00FF',
-      // 'U+  00A9',
-      'U+1000FF-10FFFF',
-    ])('$0', (val) => {
-      const expected = UnicodeRange.parse([val]);
-      expect(expected).toBeDefined();
-
-      const result = parseUnicodeRangeSync(val);
-      expect(result).toBeDefined();
-
-      expect(result).toStrictEqual(expected);
-    });
-  });
-
-  it('parses lowercase values', () => {
-    const val = 'u+00aa';
-
-    const expected = UnicodeRange.parse([val]);
-    expect(expected).toBeDefined();
-
-    const result = parseUnicodeRangeSync(val);
+  it('returns an array of number', () => {
+    const result = parseUnicodeRange('U+9');
     expect(result).toBeDefined();
-
-    expect(result).toStrictEqual(expected);
+    expect(result).toStrictEqual([0x9]);
   });
 
-  describe('parses multiple values', () => {
-    it.each([
-      'U+0-F',
-      'U+00A9-00FF',
-      // 'U+  00A9',
-      'U+1000FF-10FFFF',
-    ])('$0', () => {
-      const val = 'u+0, u+2, u+4-8';
-
-      const expected = UnicodeRange.parse(val.replaceAll(' ', '').split(','));
-      expect(expected).toBeDefined();
-
-      const result = parseUnicodeRangeSync(val);
-      expect(result).toBeDefined();
-
-      expect(result).toStrictEqual(expected);
-    });
+  it.each([
+    ['a string', validCases.single.samples[0].value],
+    ['a string with multiple values', validCases.multiple.samples[0].value],
+    ['an array of strings', validCases.arrays.samples[0].value],
+  ])('accepts $0 $1', (_, value) => {
+    expect(() => parseUnicodeRange(value)).not.toThrow();
   });
 
-  describe('parses wildcard ranges', () => {
-    it.each([
-      'U+?',
-      'U+0?????',
-      'U+10CC??-10FFFF',
-      'U+10CCFF-10FF??',
-      'U+10CC??-10FF??',
-    ])('$0', () => {
-      const val = 'u+0, u+2, u+4-8';
+  it('dedupes multiple values', () => {
+    const value = Array.from({ length: 10 }, () => 'U+9');
+    expect(parseUnicodeRange(value)).toStrictEqual([0x9]);
+    expect(parseUnicodeRange(value.join(', '))).toStrictEqual([0x9]);
+  });
 
-      const expected = UnicodeRange.parse(val.replaceAll(' ', '').split(','));
-      expect(expected).toBeDefined();
+  it('sorts multiple values by default', () => {
+    expect(parseUnicodeRange(['U+F', 'U+A', 'U+9'])).toStrictEqual([0x9, 0xA, 0xF]);
+  });
 
-      const result = parseUnicodeRangeSync(val);
-      expect(result).toBeDefined();
+  it('does not sort multiple values when an optional boolean \'true\' is passed', () => {
+    expect(parseUnicodeRange(['U+F', 'U+A', 'U+9'], true)).toStrictEqual([0xF, 0xA, 0x9]);
+  });
 
-      expect(result).toStrictEqual(expected);
-    });
+  it('parses lowercase values correctly \'u+00aa\'', () => {
+    expect(parseUnicodeRange('u+00aa')).toStrictEqual([0x00aa]);
+  });
+
+  describe('parses valid values correctly', () => {
+    for (const validCase of Object.values(validCases)) {
+      describe(validCase.name, () => {
+        it.for<ValidSample>(validCase.samples)(`$value`, ({ value, expected }) => {
+          const result = parseUnicodeRange(value);
+          expect(result).toBeDefined();
+          expect(result).toStrictEqual(expected);
+        });
+      });
+    }
   });
 
   describe('throws invalid values', () => {
-    it.each([
-      null,
-      undefined,
-      1,
-      {},
-      () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
-      '',
-      '00',
-      '00gg',
-      '00!=',
-      'U+??aa',
-      'U+??????',
-      'U+00FF-0099',
-      'U+00FF??-0099??',
-    ])('$0', (val) => {
-      if (val !== 'U+00FF-0099') {
-        // @ts-expect-error invalid value
-        expect(() => UnicodeRange.parse([val])).toThrow();
-      }
-
-      // @ts-expect-error invalid value
-      expect(() => parseUnicodeRangeSync(val)).toThrow();
-    });
+    for (const invalidCase of Object.values(invalidCases)) {
+      describe(invalidCase.name, () => {
+        it.for(invalidCase.samples)(`$0`, (value) => {
+          // @ts-expect-error invalid value
+          expect(() => parseUnicodeRange(value)).toThrow();
+        });
+      });
+    }
   });
 
-  describe('surpasses \'@japont/unicode-range\' because', () => {
-    it('accepts multiple values by default', () => {
-      const val = 'U+0000-0033, U+0066-0099, U+00CC-00FF';
+  // describe('surpasses \'@japont/unicode-range\' because', () => {
+  //   it('accepts multiple values by default', () => {
+  //     const val = 'U+0000-0033, U+0066-0099, U+00CC-00FF';
 
-      // @ts-expect-error incorrect
-      expect(() => UnicodeRange.parse(val)).toThrow();
+  //     // @ts-expect-error incorrect
+  //     expect(() => UnicodeRange.parse(val)).toThrow();
 
-      const result = parseUnicodeRangeSync(val);
-      expect(result).toBeDefined();
-      expect(result).toStrictEqual(
-        UnicodeRange.parse(val.replaceAll(' ', '').split(',')),
-      );
-    });
+  //     const result = parseUnicodeRange(val);
+  //     expect(result).toBeDefined();
+  //     expect(result).toStrictEqual(
+  //       UnicodeRange.parse(val.replaceAll(' ', '').split(',')),
+  //     );
+  //   });
 
-    it('accepts an array of multiple values by default', () => {
-      const val = ['U+0033-0066, U+0099-00AA', 'U+0066-0099, U+00CC-00FF'];
+  //   it('throws invalid interval range U+00FF-0099', () => {
+  //     const val = 'U+00FF-0099';
+  //     expect(parseUnicodeRangeSafeSync(val)).toStrictEqual([]);
 
-      expect(() => UnicodeRange.parse(val)).toThrow();
-
-      const result = parseUnicodeRangeSync(val);
-      expect(result).toBeDefined();
-
-      expect(result).toStrictEqual(
-        UnicodeRange.parse(val.map(item => item.replaceAll(' ', '').split(',')).flat()),
-      );
-    });
-
-    it('throws invalid interval range U+00FF-0099', () => {
-      const val = 'U+00FF-0099';
-      expect(parseUnicodeRangeSafeSync(val)).toStrictEqual([]);
-
-      expect(() => UnicodeRange.parse([val])).not.toThrow();
-      expect(() => parseUnicodeRangeSync(val)).toThrow();
-    });
-  });
-});
-
-describe('parseUnicodeRange', () => {
-  it.todo('is a function', () => {
-    expect(parseUnicodeRangeSync).toBeTypeOf('function');
-  });
+  //     expect(() => UnicodeRange.parse([val])).not.toThrow();
+  //     expect(() => parseUnicodeRange(val)).toThrow();
+  //   });
+  // });
 });
