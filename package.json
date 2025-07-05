@@ -20,18 +20,6 @@
       "types": "./dist/global.d.ts",
       "import": "./dist/global.js"
     },
-    "./parse": {
-      "types": "./dist/parse.d.ts",
-      "import": "./dist/parse.js"
-    },
-    "./stringify": {
-      "types": "./dist/stringify.d.ts",
-      "import": "./dist/stringify.js"
-    },
-    "./validate": {
-      "types": "./dist/validate.d.ts",
-      "import": "./dist/validate.js"
-    },
     "./package.json": "./package.json"
   },
   "files": [
