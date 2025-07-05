@@ -16,6 +16,10 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./global": {
+      "types": "./dist/global.d.ts",
+      "import": "./dist/global.js"
+    },
     "./parse": {
       "types": "./dist/parse.d.ts",
       "import": "./dist/parse.js"
