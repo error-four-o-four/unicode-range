@@ -30,6 +30,7 @@
     "prebuild": "npm run clean",
     "build": "tsc -p tsconfig.build.json && rollup -c",
     "clean": "node -e \"fs.rmSync('./dist', { recursive: true, force: true })\"",
+    "generate:md": "tsx script/generate-bench-md.ts",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "lint:dts": "npx --yes @arethetypeswrong/cli --pack .",

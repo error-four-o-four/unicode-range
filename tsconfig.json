@@ -31,6 +31,7 @@
     "esModuleInterop": true
   },
   "include": [
+    "script/**/*.ts",
     "src/**/*.ts",
     "test/**/*.ts",
     "*.config.js",

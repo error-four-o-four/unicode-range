@@ -57,11 +57,12 @@ export const createBench = (name: string, time: number) => {
 // https://github.com/tinylibs/tinybench/blob/caffce568294825bfd7f8de19cec2abe3f65796f/src/bench.ts#L244
 export const createCustomResult = (
   name: string,
-  value: string,
+  value: string | string[],
   bench: Bench,
 ): CustomResult => {
   return {
-    name: `${name} \`${value}\``,
+    name,
+    value: Array.isArray(value) ? value.join(', ') : value,
     tasks: bench.table()
       .map(task => task ?? { Samples: Infinity })
       .sort((a, b) => typeof a.Samples === 'number' && typeof b.Samples === 'number'
@@ -108,6 +109,7 @@ export const createCustomResult = (
 
 export interface CustomResult {
   name: string;
+  value: string;
   tasks: (null | Record<string, string | number | undefined | null>)[];
 }
 
