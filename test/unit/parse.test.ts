@@ -1,24 +1,24 @@
 import { describe, it, expect } from 'vitest';
 
-import { validCases, invalidCases, type ValidSample } from '../cases.js';
+import { validCasesParse, invalidCases, type ValidParseCase } from '../cases.js';
 
 import { parseUnicodeRange } from '../../src/parse.js';
 
-describe('parseUnicodeRange', () => {
-  it('is a function', () => {
+describe('parse', () => {
+  it('parseUnicodeRange is a function', () => {
     expect(parseUnicodeRange).toBeTypeOf('function');
   });
 
-  it('returns an array of number', () => {
+  it('returns an array of numbers', () => {
     const result = parseUnicodeRange('U+9');
     expect(result).toBeDefined();
     expect(result).toStrictEqual([0x9]);
   });
 
   it.each([
-    ['a string', validCases.single.samples[0].value],
-    ['a string with multiple values', validCases.multiple.samples[0].value],
-    ['an array of strings', validCases.arrays.samples[0].value],
+    ['a string', validCasesParse['single codepoint'][0].value],
+    ['a string with multiple values', validCasesParse['multiple values'][0].value],
+    ['an array of strings', validCasesParse['arrays of strings '][0].value],
   ])('accepts $0 $1', (_, value) => {
     expect(() => parseUnicodeRange(value)).not.toThrow();
   });
@@ -42,9 +42,9 @@ describe('parseUnicodeRange', () => {
   });
 
   describe('parses valid values correctly', () => {
-    for (const validCase of Object.values(validCases)) {
-      describe(validCase.name, () => {
-        it.for<ValidSample>(validCase.samples)(`$value`, ({ value, expected }) => {
+    for (const [caseName, caseValues] of Object.entries(validCasesParse)) {
+      describe(caseName, () => {
+        it.for<ValidParseCase>(caseValues)(`$value`, ({ value, expected }) => {
           const result = parseUnicodeRange(value);
           expect(result).toBeDefined();
           expect(result).toStrictEqual(expected);
@@ -54,9 +54,24 @@ describe('parseUnicodeRange', () => {
   });
 
   describe('throws invalid values', () => {
-    for (const invalidCase of Object.values(invalidCases)) {
-      describe(invalidCase.name, () => {
-        it.for(invalidCase.samples)(`$0`, (value) => {
+    const cases = ([
+      'value',
+      'single codepoint string',
+      'wildcard string',
+      'interval string',
+    ] satisfies (keyof typeof invalidCases)[])
+      .reduce((all, key) => Object.assign(all, {
+        [key]: invalidCases[key],
+      }), {} as Record<string, (unknown)[]>);
+
+    it('number', () => {
+      // @ts-expect-error invalid value
+      expect(() => parseUnicodeRange(0)).toThrow();
+    });
+
+    for (const [caseName, caseValues] of Object.entries(cases)) {
+      describe(caseName, () => {
+        it.for(caseValues)(`$0`, (value) => {
           // @ts-expect-error invalid value
           expect(() => parseUnicodeRange(value)).toThrow();
         });

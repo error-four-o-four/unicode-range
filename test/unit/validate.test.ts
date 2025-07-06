@@ -1,15 +1,15 @@
 import { describe, it, expect } from 'vitest';
 
 import {
-  validCases,
+  validCasesParse,
   invalidCases,
-  type ValidSample,
+  type ValidParseCase,
 } from '../cases.js';
 
 import { isValidUnicodeRange } from '../../src/validate.js';
 
-describe('isValidUnicodeRange', () => {
-  it('is a function', () => {
+describe('validate', () => {
+  it('isValidUnicodeRange is a function', () => {
     expect(isValidUnicodeRange).toBeTypeOf('function');
   });
 
@@ -19,22 +19,22 @@ describe('isValidUnicodeRange', () => {
     expect(result).toBe(true);
   });
 
-  it(`accepts a string '${validCases.single.samples[0].value}'`, () => {
-    expect(() => isValidUnicodeRange(validCases.single.samples[0].value)).not.toThrow();
+  it(`accepts a string '${validCasesParse['single codepoint'][0].value}'`, () => {
+    expect(() => isValidUnicodeRange(validCasesParse['single codepoint'][0].value)).not.toThrow();
   });
 
-  it(`accepts a string with multiple values '${validCases.multiple.samples[0].value}'`, () => {
-    expect(() => isValidUnicodeRange(validCases.multiple.samples[0].value)).not.toThrow();
+  it(`accepts a string with multiple values '${validCasesParse['multiple values'][0].value}'`, () => {
+    expect(() => isValidUnicodeRange(validCasesParse['multiple values'][0].value)).not.toThrow();
   });
 
-  it(`accepts an array of strings '${String(validCases.arrays.samples[0].value)}'`, () => {
-    expect(() => isValidUnicodeRange(validCases.arrays.samples[0].value)).not.toThrow();
+  it(`accepts an array of strings '${String(validCasesParse['arrays of strings '][0].value)}'`, () => {
+    expect(() => isValidUnicodeRange(validCasesParse['arrays of strings '][0].value)).not.toThrow();
   });
 
   describe(`returns 'true' for valid values`, () => {
-    for (const validCase of Object.values(validCases)) {
-      describe(validCase.name, () => {
-        it.for<ValidSample>(validCase.samples)(`$value`, ({ value }) => {
+    for (const [caseName, caseValues] of Object.entries(validCasesParse)) {
+      describe(caseName, () => {
+        it.for<ValidParseCase>(caseValues)(`$value`, ({ value: value }) => {
           expect(isValidUnicodeRange(value)).toBe(true);
         });
       });
@@ -42,9 +42,9 @@ describe('isValidUnicodeRange', () => {
   });
 
   describe(`returns 'false' for invalid values`, () => {
-    for (const invalidCase of Object.values(invalidCases)) {
-      describe(invalidCase.name, () => {
-        it.for(invalidCase.samples)(`$0`, (value) => {
+    for (const [caseName, caseValues] of Object.entries(invalidCases)) {
+      describe(caseName, () => {
+        it.for(caseValues)(`$0`, (value) => {
           expect(isValidUnicodeRange(value)).toBe(false);
         });
       });
