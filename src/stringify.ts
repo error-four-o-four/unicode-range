@@ -55,3 +55,25 @@ export const stringifyUnicodeRange = (input: number[]): string[] => {
 
   return results;
 };
+
+export const stringifyUnicodeRangeSafe = (input: unknown): string[] => {
+  if (!Array.isArray(input) || typeof input[0] !== 'number') return [];
+
+  try {
+    return stringifyUnicodeRange(input.filter(v => typeof v === 'number'));
+  } catch (e) { // eslint-disable-line @typescript-eslint/no-unused-vars
+
+    // @todo
+    // if (process?.env?.NODE_ENV === 'test') return [];
+
+    // console.warn(
+    //   `Failed to parse unicode-range: ${
+    //     (error instanceof Error)
+    //       ? error.message
+    //       : String(error) || 'Unhandled'
+    //   }`,
+    // );
+  }
+
+  return [];
+};
