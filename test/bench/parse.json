@@ -5,19 +5,19 @@
     "tasks": [
       {
         "Task name": "@http404 parseUnicodeRange(value);",
-        "Latency avg (ns)": "247.69 ± 1.19%",
-        "Latency med (ns)": "217.00 ± 0.00",
-        "Throughput avg (ops/s)": "4762004 ± 0.02%",
-        "Throughput med (ops/s)": "4608295 ± 0",
-        "Samples": 4037237
+        "Latency avg (ns)": "226.66 ± 0.86%",
+        "Latency med (ns)": "200.00 ± 0.00",
+        "Throughput avg (ops/s)": "4989494 ± 0.02%",
+        "Throughput med (ops/s)": "5000000 ± 0",
+        "Samples": 4411943
       },
       {
         "Task name": "@japont UnicodeRange.parse([value]);",
-        "Latency avg (ns)": "368.68 ± 0.23%",
-        "Latency med (ns)": "325.00 ± 0.00",
-        "Throughput avg (ops/s)": "2873358 ± 0.02%",
-        "Throughput med (ops/s)": "3076923 ± 0",
-        "Samples": 2712407
+        "Latency avg (ns)": "341.23 ± 0.24%",
+        "Latency med (ns)": "300.00 ± 0.00",
+        "Throughput avg (ops/s)": "3082343 ± 0.02%",
+        "Throughput med (ops/s)": "3333333 ± 0",
+        "Samples": 2930574
       }
     ]
   },
@@ -27,19 +27,19 @@
     "tasks": [
       {
         "Task name": "@http404 parseUnicodeRange(value);",
-        "Latency avg (ns)": "1221681 ± 2.43%",
-        "Latency med (ns)": "977597 ± 23941",
-        "Throughput avg (ops/s)": "937 ± 1.00%",
-        "Throughput med (ops/s)": "1023 ± 25",
-        "Samples": 2047
+        "Latency avg (ns)": "1143717 ± 2.47%",
+        "Latency med (ns)": "901847 ± 24747",
+        "Throughput avg (ops/s)": "1010 ± 1.00%",
+        "Throughput med (ops/s)": "1109 ± 31",
+        "Samples": 2186
       },
       {
         "Task name": "@japont UnicodeRange.parse([value]);",
-        "Latency avg (ns)": "11281909 ± 2.22%",
-        "Latency med (ns)": "10545136 ± 471196",
-        "Throughput avg (ops/s)": "90 ± 1.48%",
-        "Throughput med (ops/s)": "95 ± 4",
-        "Samples": 222
+        "Latency avg (ns)": "10390178 ± 1.75%",
+        "Latency med (ns)": "9846271 ± 593334",
+        "Throughput avg (ops/s)": "98 ± 1.42%",
+        "Throughput med (ops/s)": "102 ± 7",
+        "Samples": 241
       }
     ]
   },
@@ -49,19 +49,19 @@
     "tasks": [
       {
         "Task name": "@http404 parseUnicodeRange(value);",
-        "Latency avg (ns)": "218903 ± 1.66%",
-        "Latency med (ns)": "176149 ± 5526.0",
-        "Throughput avg (ops/s)": "5383 ± 0.34%",
-        "Throughput med (ops/s)": "5677 ± 182",
-        "Samples": 11421
+        "Latency avg (ns)": "202297 ± 1.57%",
+        "Latency med (ns)": "162692 ± 4101.0",
+        "Throughput avg (ops/s)": "5834 ± 0.33%",
+        "Throughput med (ops/s)": "6147 ± 158",
+        "Samples": 12359
       },
       {
         "Task name": "@japont UnicodeRange.parse([value]);",
-        "Latency avg (ns)": "2106192 ± 1.98%",
-        "Latency med (ns)": "1848486 ± 34450",
-        "Throughput avg (ops/s)": "505 ± 1.03%",
-        "Throughput med (ops/s)": "541 ± 10",
-        "Samples": 1187
+        "Latency avg (ns)": "1921909 ± 1.87%",
+        "Latency med (ns)": "1698279 ± 33503",
+        "Throughput avg (ops/s)": "553 ± 0.97%",
+        "Throughput med (ops/s)": "589 ± 12",
+        "Samples": 1301
       }
     ]
   },
@@ -71,35 +71,35 @@
     "tasks": [
       {
         "Task name": "@http404 value.split(/,\\s*/g).map(v => parseUnicodeRange(v));",
-        "Latency avg (ns)": "452.20 ± 1.22%",
-        "Latency med (ns)": "433.00 ± 0.00",
-        "Throughput avg (ops/s)": "2347487 ± 0.01%",
-        "Throughput med (ops/s)": "2309469 ± 0",
-        "Samples": 5528540
+        "Latency avg (ns)": "434.77 ± 0.85%",
+        "Latency med (ns)": "400.00 ± 0.00",
+        "Throughput avg (ops/s)": "2542194 ± 0.01%",
+        "Throughput med (ops/s)": "2500000 ± 0",
+        "Samples": 5750633
       },
       {
         "Task name": "@http404 parseUnicodeRange(value);",
-        "Latency avg (ns)": "597.63 ± 2.79%",
-        "Latency med (ns)": "542.00 ± 1.00",
-        "Throughput avg (ops/s)": "1785662 ± 0.01%",
-        "Throughput med (ops/s)": "1845018 ± 3410",
-        "Samples": 4183181
+        "Latency avg (ns)": "562.94 ± 1.21%",
+        "Latency med (ns)": "500.00 ± 0.00",
+        "Throughput avg (ops/s)": "1867043 ± 0.01%",
+        "Throughput med (ops/s)": "2000000 ± 0",
+        "Samples": 4440994
       },
       {
         "Task name": "@japont value.split(/,\\s*/g).map(v => UnicodeRange.parse([v]));",
-        "Latency avg (ns)": "786.22 ± 3.14%",
-        "Latency med (ns)": "758.00 ± 1.00",
-        "Throughput avg (ops/s)": "1401575 ± 0.01%",
-        "Throughput med (ops/s)": "1319261 ± 1738",
-        "Samples": 3179767
+        "Latency avg (ns)": "685.07 ± 0.59%",
+        "Latency med (ns)": "600.00 ± 0.00",
+        "Throughput avg (ops/s)": "1553504 ± 0.01%",
+        "Throughput med (ops/s)": "1666667 ± 0",
+        "Samples": 3649276
       },
       {
         "Task name": "@japont UnicodeRange.parse(value.split(/,\\s*/g));",
-        "Latency avg (ns)": "819.12 ± 1.78%",
-        "Latency med (ns)": "758.00 ± 1.00",
-        "Throughput avg (ops/s)": "1344014 ± 0.01%",
-        "Throughput med (ops/s)": "1319261 ± 1738",
-        "Samples": 3052271
+        "Latency avg (ns)": "765.54 ± 1.78%",
+        "Latency med (ns)": "700.00 ± 0.00",
+        "Throughput avg (ops/s)": "1423105 ± 0.01%",
+        "Throughput med (ops/s)": "1428571 ± 0",
+        "Samples": 3265776
       }
     ]
   },
@@ -109,35 +109,35 @@
     "tasks": [
       {
         "Task name": "@http404 value.split(/,\\s*/g).map(v => parseUnicodeRange(v));",
-        "Latency avg (ns)": "2285.2 ± 0.49%",
-        "Latency med (ns)": "2059.0 ± 108.00",
-        "Throughput avg (ops/s)": "475844 ± 0.02%",
-        "Throughput med (ops/s)": "485673 ± 24205",
-        "Samples": 1094001
+        "Latency avg (ns)": "2084.2 ± 0.45%",
+        "Latency med (ns)": "1900.0 ± 100.00",
+        "Throughput avg (ops/s)": "515987 ± 0.02%",
+        "Throughput med (ops/s)": "526316 ± 26316",
+        "Samples": 1199478
       },
       {
         "Task name": "@http404 parseUnicodeRange(value);",
-        "Latency avg (ns)": "14999 ± 0.60%",
-        "Latency med (ns)": "13108 ± 866.00",
-        "Throughput avg (ops/s)": "73242 ± 0.06%",
-        "Throughput med (ops/s)": "76289 ± 4733",
-        "Samples": 166677
+        "Latency avg (ns)": "13419 ± 0.58%",
+        "Latency med (ns)": "11999 ± 302.00",
+        "Throughput avg (ops/s)": "80943 ± 0.05%",
+        "Throughput med (ops/s)": "83340 ± 2137",
+        "Samples": 186310
       },
       {
         "Task name": "@japont value.split(/,\\s*/g).map(v => UnicodeRange.parse([v]));",
-        "Latency avg (ns)": "26031 ± 0.14%",
-        "Latency med (ns)": "25134 ± 1082.0",
-        "Throughput avg (ops/s)": "39107 ± 0.06%",
-        "Throughput med (ops/s)": "39787 ± 1642",
-        "Samples": 96040
+        "Latency avg (ns)": "23099 ± 0.12%",
+        "Latency med (ns)": "22399 ± 500.00",
+        "Throughput avg (ops/s)": "43770 ± 0.05%",
+        "Throughput med (ops/s)": "44645 ± 1019",
+        "Samples": 108230
       },
       {
         "Task name": "@japont UnicodeRange.parse(value.split(/,\\s*/g));",
-        "Latency avg (ns)": "29695 ± 0.60%",
-        "Latency med (ns)": "26975 ± 867.00",
-        "Throughput avg (ops/s)": "36182 ± 0.08%",
-        "Throughput med (ops/s)": "37071 ± 1230",
-        "Samples": 84190
+        "Latency avg (ns)": "26134 ± 0.48%",
+        "Latency med (ns)": "24299 ± 700.00",
+        "Throughput avg (ops/s)": "40446 ± 0.06%",
+        "Throughput med (ops/s)": "41154 ± 1159",
+        "Samples": 95661
       }
     ]
   },
@@ -147,35 +147,35 @@
     "tasks": [
       {
         "Task name": "@http404 value.split(/,\\s*/g).map(v => parseUnicodeRange(v));",
-        "Latency avg (ns)": "2996.5 ± 0.59%",
-        "Latency med (ns)": "2600.0 ± 108.00",
-        "Throughput avg (ops/s)": "374007 ± 0.02%",
-        "Throughput med (ops/s)": "384615 ± 16669",
-        "Samples": 834307
-      },
-      {
-        "Task name": "@japont value.split(/,\\s*/g).map(v => UnicodeRange.parse([v]));",
-        "Latency avg (ns)": "30523 ± 0.42%",
-        "Latency med (ns)": "28600 ± 650.00",
-        "Throughput avg (ops/s)": "34202 ± 0.07%",
-        "Throughput med (ops/s)": "34965 ± 813",
-        "Samples": 81905
+        "Latency avg (ns)": "2680.5 ± 0.70%",
+        "Latency med (ns)": "2400.0 ± 100.00",
+        "Throughput avg (ops/s)": "406718 ± 0.02%",
+        "Throughput med (ops/s)": "416667 ± 18116",
+        "Samples": 932659
       },
       {
         "Task name": "@http404 parseUnicodeRange(value);",
-        "Latency avg (ns)": "31153 ± 0.68%",
-        "Latency med (ns)": "27734 ± 759.00",
-        "Throughput avg (ops/s)": "35176 ± 0.08%",
-        "Throughput med (ops/s)": "36057 ± 1015",
-        "Samples": 80250
+        "Latency avg (ns)": "27669 ± 0.62%",
+        "Latency med (ns)": "24998 ± 601.00",
+        "Throughput avg (ops/s)": "39317 ± 0.07%",
+        "Throughput med (ops/s)": "40003 ± 982",
+        "Samples": 90364
       },
       {
         "Task name": "@japont UnicodeRange.parse(value.split(/,\\s*/g));",
-        "Latency avg (ns)": "31817 ± 0.69%",
-        "Latency med (ns)": "28383 ± 542.00",
-        "Throughput avg (ops/s)": "34304 ± 0.08%",
-        "Throughput med (ops/s)": "35232 ± 686",
-        "Samples": 78576
+        "Latency avg (ns)": "28043 ± 0.56%",
+        "Latency med (ns)": "26102 ± 399.00",
+        "Throughput avg (ops/s)": "37704 ± 0.06%",
+        "Throughput med (ops/s)": "38311 ± 578",
+        "Samples": 89149
+      },
+      {
+        "Task name": "@japont value.split(/,\\s*/g).map(v => UnicodeRange.parse([v]));",
+        "Latency avg (ns)": "28100 ± 0.42%",
+        "Latency med (ns)": "26599 ± 401.00",
+        "Throughput avg (ops/s)": "37030 ± 0.06%",
+        "Throughput med (ops/s)": "37595 ± 574",
+        "Samples": 88969
       }
     ]
   },
@@ -185,35 +185,35 @@
     "tasks": [
       {
         "Task name": "@http404 value.split(/,\\s*/g).map(v => parseUnicodeRange(v));",
-        "Latency avg (ns)": "5392.4 ± 0.20%",
-        "Latency med (ns)": "5092.0 ± 217.00",
-        "Throughput avg (ops/s)": "193150 ± 0.03%",
-        "Throughput med (ops/s)": "196386 ± 8742",
-        "Samples": 463616
+        "Latency avg (ns)": "4837.5 ± 0.41%",
+        "Latency med (ns)": "4600.0 ± 200.00",
+        "Throughput avg (ops/s)": "213849 ± 0.03%",
+        "Throughput med (ops/s)": "217391 ± 9830",
+        "Samples": 516799
       },
       {
         "Task name": "@http404 parseUnicodeRange(value);",
-        "Latency avg (ns)": "36528 ± 1.15%",
-        "Latency med (ns)": "34016 ± 1082.0",
-        "Throughput avg (ops/s)": "28866 ± 0.09%",
-        "Throughput med (ops/s)": "29398 ± 908",
-        "Samples": 68441
+        "Latency avg (ns)": "32574 ± 0.60%",
+        "Latency med (ns)": "29803 ± 805.00",
+        "Throughput avg (ops/s)": "32832 ± 0.07%",
+        "Throughput med (ops/s)": "33554 ± 931",
+        "Samples": 76749
       },
       {
         "Task name": "@japont UnicodeRange.parse(value.split(/,\\s*/g));",
-        "Latency avg (ns)": "49493 ± 0.40%",
-        "Latency med (ns)": "46259 ± 1734.0",
-        "Throughput avg (ops/s)": "21036 ± 0.10%",
-        "Throughput med (ops/s)": "21617 ± 827",
-        "Samples": 50512
+        "Latency avg (ns)": "45265 ± 0.43%",
+        "Latency med (ns)": "42304 ± 806.00",
+        "Throughput avg (ops/s)": "23057 ± 0.08%",
+        "Throughput med (ops/s)": "23638 ± 459",
+        "Samples": 55231
       },
       {
         "Task name": "@japont value.split(/,\\s*/g).map(v => UnicodeRange.parse([v]));",
-        "Latency avg (ns)": "57768 ± 0.57%",
-        "Latency med (ns)": "54058 ± 1625.0",
-        "Throughput avg (ops/s)": "18109 ± 0.10%",
-        "Throughput med (ops/s)": "18499 ± 573",
-        "Samples": 43277
+        "Latency avg (ns)": "52049 ± 0.48%",
+        "Latency med (ns)": "49097 ± 800.00",
+        "Throughput avg (ops/s)": "19948 ± 0.08%",
+        "Throughput med (ops/s)": "20368 ± 337",
+        "Samples": 48032
       }
     ]
   }

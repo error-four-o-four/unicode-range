@@ -54,58 +54,58 @@ UnicodeRange.parse('U+0-F');
 
  value `U+10ABCD`                     | Latency avg (ns) | Throughput avg (ops/s) | Samples 
 --------------------------------------|------------------|------------------------|---------
- @http404 parseUnicodeRange(value);   | 256.30 ± 1.20%   | 4610064 ± 0.02%        | 3901668 
- @japont UnicodeRange.parse([value]); | 364.07 ± 0.18%   | 2894613 ± 0.01%        | 2746709 
+ @http404 parseUnicodeRange(value);   | 226.66 ± 0.86%   | 4989494 ± 0.02%        | 4411943 
+ @japont UnicodeRange.parse([value]); | 341.23 ± 0.24%   | 3082343 ± 0.02%        | 2930574 
 
 ### wildcard range
 
  value `U+10????`                     | Latency avg (ns) | Throughput avg (ops/s) | Samples 
 --------------------------------------|------------------|------------------------|---------
- @http404 parseUnicodeRange(value);   | 1205461 ± 2.37%  | 946 ± 0.98%            | 2074    
- @japont UnicodeRange.parse([value]); | 11566469 ± 3.01% | 89 ± 1.66%             | 217     
+ @http404 parseUnicodeRange(value);   | 1143717 ± 2.47%  | 1010 ± 1.00%           | 2186    
+ @japont UnicodeRange.parse([value]); | 10390178 ± 1.75% | 98 ± 1.42%             | 241     
 
 ### interval range
 
  value `U+10ABCD-10FFFF`              | Latency avg (ns) | Throughput avg (ops/s) | Samples 
 --------------------------------------|------------------|------------------------|---------
- @http404 parseUnicodeRange(value);   | 221010 ± 1.67%   | 5368 ± 0.35%           | 11312   
- @japont UnicodeRange.parse([value]); | 2096077 ± 1.95%  | 507 ± 1.01%            | 1193    
+ @http404 parseUnicodeRange(value);   | 202297 ± 1.57%   | 5834 ± 0.33%           | 12359   
+ @japont UnicodeRange.parse([value]); | 1921909 ± 1.87%  | 553 ± 0.97%            | 1301    
 
 ### multiple single codepoints
 
  value `U+0, U+0f`                                               | Latency avg (ns) | Throughput avg (ops/s) | Samples 
 -----------------------------------------------------------------|------------------|------------------------|---------
- @http404 value.split(/,\s*/g).map(v => parseUnicodeRange(v));   | 463.13 ± 1.19%   | 2345905 ± 0.01%        | 5398100 
- @http404 parseUnicodeRange(value);                              | 695.23 ± 1.10%   | 1545070 ± 0.01%        | 3595924 
- @japont value.split(/,\s*/g).map(v => UnicodeRange.parse([v])); | 790.80 ± 0.53%   | 1380958 ± 0.01%        | 3161368 
- @japont UnicodeRange.parse(value.split(/,\s*/g));               | 811.25 ± 1.32%   | 1345320 ± 0.01%        | 3081658 
+ @http404 value.split(/,\s*/g).map(v => parseUnicodeRange(v));   | 434.77 ± 0.85%   | 2542194 ± 0.01%        | 5750633 
+ @http404 parseUnicodeRange(value);                              | 562.94 ± 1.21%   | 1867043 ± 0.01%        | 4440994 
+ @japont value.split(/,\s*/g).map(v => UnicodeRange.parse([v])); | 685.07 ± 0.59%   | 1553504 ± 0.01%        | 3649276 
+ @japont UnicodeRange.parse(value.split(/,\s*/g));               | 765.54 ± 1.78%   | 1423105 ± 0.01%        | 3265776 
 
 ### multiple wildcard ranges
 
  value `u+a?, u+b??`                                             | Latency avg (ns) | Throughput avg (ops/s) | Samples 
 -----------------------------------------------------------------|------------------|------------------------|---------
- @http404 value.split(/,\s*/g).map(v => parseUnicodeRange(v));   | 2382.2 ± 1.45%   | 462638 ± 0.02%         | 1049455 
- @http404 parseUnicodeRange(value);                              | 15690 ± 0.91%    | 71584 ± 0.07%          | 159334  
- @japont value.split(/,\s*/g).map(v => UnicodeRange.parse([v])); | 25817 ± 0.11%    | 39273 ± 0.06%          | 96834   
- @japont UnicodeRange.parse(value.split(/,\s*/g));               | 29071 ± 0.46%    | 36186 ± 0.07%          | 85995   
+ @http404 value.split(/,\s*/g).map(v => parseUnicodeRange(v));   | 2084.2 ± 0.45%   | 515987 ± 0.02%         | 1199478 
+ @http404 parseUnicodeRange(value);                              | 13419 ± 0.58%    | 80943 ± 0.05%          | 186310  
+ @japont value.split(/,\s*/g).map(v => UnicodeRange.parse([v])); | 23099 ± 0.12%    | 43770 ± 0.05%          | 108230  
+ @japont UnicodeRange.parse(value.split(/,\s*/g));               | 26134 ± 0.48%    | 40446 ± 0.06%          | 95661   
 
 ### multiple interval ranges
 
  value `U+aaa-ccc, U+aacc-aadd`                                  | Latency avg (ns) | Throughput avg (ops/s) | Samples 
 -----------------------------------------------------------------|------------------|------------------------|---------
- @http404 value.split(/,\s*/g).map(v => parseUnicodeRange(v));   | 3095.6 ± 0.71%   | 367551 ± 0.02%         | 807695  
- @japont value.split(/,\s*/g).map(v => UnicodeRange.parse([v])); | 30462 ± 0.47%    | 34329 ± 0.07%          | 82069   
- @japont UnicodeRange.parse(value.split(/,\s*/g));               | 30490 ± 0.49%    | 34655 ± 0.07%          | 81993   
- @http404 parseUnicodeRange(value);                              | 30949 ± 0.70%    | 35400 ± 0.08%          | 80779   
+ @http404 value.split(/,\s*/g).map(v => parseUnicodeRange(v));   | 2680.5 ± 0.70%   | 406718 ± 0.02%         | 932659  
+ @http404 parseUnicodeRange(value);                              | 27669 ± 0.62%    | 39317 ± 0.07%          | 90364   
+ @japont UnicodeRange.parse(value.split(/,\s*/g));               | 28043 ± 0.56%    | 37704 ± 0.06%          | 89149   
+ @japont value.split(/,\s*/g).map(v => UnicodeRange.parse([v])); | 28100 ± 0.42%    | 37030 ± 0.06%          | 88969   
 
 ### multiple mixed values
 
  value `U+0, U+00, U+aaa-ccc, U+aacc-aadd, u+a?, u+b??`          | Latency avg (ns) | Throughput avg (ops/s) | Samples 
 -----------------------------------------------------------------|------------------|------------------------|---------
- @http404 value.split(/,\s*/g).map(v => parseUnicodeRange(v));   | 5514.5 ± 0.37%   | 191480 ± 0.03%         | 453349  
- @http404 parseUnicodeRange(value);                              | 36796 ± 0.53%    | 28877 ± 0.09%          | 67943   
- @japont UnicodeRange.parse(value.split(/,\s*/g));               | 50552 ± 0.65%    | 20986 ± 0.10%          | 49455   
- @japont value.split(/,\s*/g).map(v => UnicodeRange.parse([v])); | 58248 ± 0.59%    | 17906 ± 0.10%          | 42920   
+ @http404 value.split(/,\s*/g).map(v => parseUnicodeRange(v));   | 4837.5 ± 0.41%   | 213849 ± 0.03%         | 516799  
+ @http404 parseUnicodeRange(value);                              | 32574 ± 0.60%    | 32832 ± 0.07%          | 76749   
+ @japont UnicodeRange.parse(value.split(/,\s*/g));               | 45265 ± 0.43%    | 23057 ± 0.08%          | 55231   
+ @japont value.split(/,\s*/g).map(v => UnicodeRange.parse([v])); | 52049 ± 0.48%    | 19948 ± 0.08%          | 48032   
 
 <!-- auto-generated-end bench-results -->
 
