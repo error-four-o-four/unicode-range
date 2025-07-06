@@ -38,14 +38,37 @@ parseUnicodeRange('U+0-F');
 ```
 
 ```js
-// global 'UnicodeParser'
+// global 'UnicodeRange'
 import '@http404/unicode-range/global';
 UnicodeRange.parse('U+0-F');
 ```
 
 ## Added Functionality
 
-@todo
+This package provides the functions `parseUnicodeRangeSafe` and `stringifyUnicodeRangeSafe` which return an empty array instead of throwing a TypeError.
+
+Additionally, there's `isValidUnicodeRange`, which simply returns a boolean.
+
+The function `parseUnicodeRange` accepts a single string as an argument, which can also include multiple values (e.g. `U+0, U+9`).
+
+## Usage
+
+```js
+import UnicodeRange from '@http404/unicode-range';
+
+// Parse ( e.g. U+30-39 -> [30, 31, ..., 39] )
+const Hiragana = UnicodeRange
+	.parse('U+3041-3096, U+3099-309F')
+	.map(cp => String.fromCodePoint(cp));
+
+console.log(Hiragana);
+
+// Stringify ( e.g. [30, 31, ..., 39] -> U+30-39 )
+const DigitCodePoints = '0123456789'.split('').map(c => c.codePointAt(0));
+const DigitUnicodeRange = UnicodeRange.stringify(DigitCodePoints);
+
+console.log(NumericUnicodeRange);
+```
 
 ## Benchmark
 
@@ -109,33 +132,10 @@ UnicodeRange.parse('U+0-F');
 
 <!-- auto-generated-end bench-results -->
 
-<!--
-
-## Usage
-
-```js
-import { UnicodeRange } from '@http404/unicode-range';
-
-// Parse ( e.g. U+30-39 -> [30, 31, ..., 39] )
-const HiraganaUnicodeRangeList = ['U+3041-3096', 'U+3099-309F'];
-const HiraganaCodePointList = UnicodeRange.parse(HiraganaUnicodeRangeList);
-const Hiragana = HiraganaCodePointList.map(cp => String.fromCodePoint(cp)));
-console.log(Hiragana);
-
-// Stringify ( e.g. [30, 31, ..., 39] -> U+30-39 )
-const Digit = '0123456789';
-const DigitCodePointList = Digit.split('').map(c => c.codePointAt(0));
-const DigitUnicodeRangeList = UnicodeRange.stringify(DigitCodePointList);
-console.log(NumericUnicodeRangeList);
-```
-
--->
-
 ## Contribute
 
 Yes.
 
-
 ## License
 
-MIT (c)
+MIT License
