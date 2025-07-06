@@ -3,7 +3,7 @@ import {
   parseUnicodeRangeSafe,
 } from './parse.js';
 
-import { stringify } from './stringify.js';
+import { stringifyUnicodeRange } from './stringify.js';
 
 import { isValidUnicodeRange } from './validate.js';
 
@@ -11,12 +11,12 @@ export {
   isValidUnicodeRange,
   parseUnicodeRange,
   parseUnicodeRangeSafe,
-  stringify,
+  stringifyUnicodeRange,
 };
 
 export default {
   parse: parseUnicodeRange,
   parseSafe: parseUnicodeRangeSafe,
-  stringify,
+  stringify: stringifyUnicodeRange,
   validate: isValidUnicodeRange,
 };
