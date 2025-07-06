@@ -24,7 +24,9 @@
   },
   "files": [
     "dist",
-    "package.json"
+    "package.json",
+    "LICENSE",
+    "README.md"
   ],
   "scripts": {
     "prebuild": "npm run clean",
