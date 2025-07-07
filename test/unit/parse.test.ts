@@ -59,6 +59,7 @@ describe('parse', () => {
       'single codepoint string',
       'wildcard string',
       'interval string',
+      'multiple strings',
     ] satisfies (keyof typeof invalidCases)[])
       .reduce((all, key) => Object.assign(all, {
         [key]: invalidCases[key],

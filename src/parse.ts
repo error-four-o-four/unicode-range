@@ -9,7 +9,7 @@ import {
 export const parseSingleCodepoint = (input: string): number => {
   const n = parseInt(input, 16);
   if (n > CODEPOINT_MAX) {
-    throw new TypeError(getErrorMessage(input));
+    throw new TypeError(getErrorMessage(input, `${input} is greater than ${CODEPOINT_MAX}`));
   }
   return n;
 };
@@ -38,7 +38,7 @@ export const parseIntervalRange = (
     : parseSingleCodepoint(end);
 
   if (a > b) {
-    throw new TypeError(getErrorMessage(`${start}-${end}`));
+    throw new TypeError(getErrorMessage(`${start}-${end}`, `${end} is greater than ${start}`));
   }
 
   return [a, b];
