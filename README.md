@@ -10,7 +10,9 @@
 [Codecov]: https://codecov.io/gh/Japont/unicode-range
 -->
 
-@http404/unicode-range is an ESM-only JavaScript library for parsing, validating, and stringifying [CSS unicode-range](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range) values. It supports the common unicode-range strings as described in the [CSS Fonts specification](https://drafts.csswg.org/css-fonts-4/#unicode-range-desc). The package is based on the original [@Japont/unicode-range](https://github.com/Japont/unicode-range) but offers improved performance and functionality.
+> Unicode parsing made simple, safe, and supercharged! 🚀
+
+@http404/unicode-range is an ECMAScript Module (ESM) JavaScript library designed for parsing, validating, and stringifying [CSS unicode-range](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range) values. It supports unicode-range strings as specified in the [CSS Fonts specification](https://drafts.csswg.org/css-fonts-4/#unicode-range-desc). This package is based on [@japont/unicode-range](https://github.com/Japont/unicode-range) and provides enhanced performance and additional features.
 
 ## Install
 
@@ -18,12 +20,12 @@
 npm i @http404/unicode-range
 ```
 
-> [!IMPORTANT]
-> This package is ESM-only. It cannot be require()'d from CommonJS. [Read More](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c)
+> [!NOTE]
+> This package is ESM-only and cannot be imported using require() from CommonJS. For more information, see [this guide](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c)
 
 ## Usage
 
-This package provides separate entry points.
+The package provides multiple entry points for different usage scenarios.
 
 ```js
 // default
@@ -45,11 +47,19 @@ UnicodeRange.parse('U+0-F');
 
 ## Added Functionality
 
-This package provides the functions `parseUnicodeRangeSafe` and `stringifyUnicodeRangeSafe` which return an empty array instead of throwing a TypeError.
+The package includes the functions `parseUnicodeRangeSafe` and `stringifyUnicodeRangeSafe`, which return an empty array instead of throwing a TypeError on invalid input.
 
-Additionally, there's `isValidUnicodeRange`, which simply returns a boolean.
+The function `isValidUnicodeRange` returns a boolean indicating whether the input is a valid unicode-range string.
 
-The function `parseUnicodeRange` accepts a single string as an argument, which can also include multiple values (e.g. `U+0, U+9`).
+The `parseUnicodeRange` function accepts a single string argument, which may contain multiple values (e.g., 'U+0, U+9'). By default, it returns a deduplicated and sorted array of code points. To disable sorting and improve performance, an optional boolean can be provided as the second argument.
+
+```js
+UnicodeRange.parse('U+99-9F, U+41-96');
+// [65, 66, 67, ..., 150, 153, 154, 155, ..., 159]
+
+UnicodeRange.parse('U+99-9F, U+41-96', true);
+// [153, 154, 155, ..., 159, 65, 66, 67, ..., 150]
+```
 
 ## Usage
 
