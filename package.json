@@ -6,8 +6,17 @@
     "css",
     "font-face",
     "unicode",
-    "unicode-range"
+    "unicode-range",
+    "parser"
   ],
+  "homepage": "https://https://github.com/error-four-o-four/unicode-range",
+	"repository": {
+		"type": "git",
+		"url": "https://https://github.com/error-four-o-four/unicode-range.git"
+	},
+	"bugs": {
+		"url": "https://https://github.com/error-four-o-four/unicode-range/issues"
+	},
   "license": "MIT",
   "author": "error-four-o-four",
   "type": "module",
