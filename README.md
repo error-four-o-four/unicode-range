@@ -1,16 +1,15 @@
 # @http404/unicode-range
 
-[![CI](https://github.com/error-four-o-four/unicode-range/actions/workflows/ci.yml/badge.svg)](https://github.com/error-four-o-four/unicode-range/actions/workflows/ci.yml)
-
-<!--
 [![NPM-Badge]][NPM]
+[![CI-Badge]][CI]
 [![Codecov-Badge]][Codecov]
 
 [NPM-Badge]: https://img.shields.io/npm/v/@http404/unicode-range.svg?style=flat-square
 [NPM]: https://www.npmjs.com/package/@http404/unicode-range
-[Codecov-Badge]: https://img.shields.io/codecov/c/github/Japont/unicode-range.svg?style=flat-square
-[Codecov]: https://codecov.io/gh/Japont/unicode-range
--->
+[CI-Badge]: https://github.com/error-four-o-four/unicode-range/actions/workflows/ci.yml/badge.svg
+[CI]: https://github.com/error-four-o-four/unicode-range/actions/workflows/ci.yml
+[Codecov-Badge]: https://codecov.io/github/error-four-o-four/unicode-range/graph/badge.svg?token=tHGcN0YF06
+[Codecov]: https://codecov.io/github/error-four-o-four/unicode-range
 
 > Unicode parsing made simple, safe, and supercharged! 🚀
 
