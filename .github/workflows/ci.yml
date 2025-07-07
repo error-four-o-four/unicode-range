@@ -28,4 +28,20 @@ jobs:
         run: npm install
 
       - name: Run tests
-        run: npm run test:unit
+        run: npm run test:coverage
+
+      # https://docs.codecov.com/docs/test-analytics
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          fail_ci_if_error: true
+          verbose: true
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          fail_ci_if_error: true
+          verbose: true
+          token: ${{ secrets.CODECOV_TOKEN }}
