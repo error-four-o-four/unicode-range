@@ -1,5 +1,7 @@
 # @http404/unicode-range
 
+[![CI](https://github.com/error-four-o-four/unicode-range/actions/workflows/ci.yml/badge.svg)](https://github.com/error-four-o-four/unicode-range/actions/workflows/ci.yml)
+
 <!--
 [![NPM-Badge]][NPM]
 [![Codecov-Badge]][Codecov]
