@@ -9,13 +9,13 @@
     "unicode-range",
     "parser"
   ],
-  "homepage": "https://https://github.com/error-four-o-four/unicode-range",
+  "homepage": "https://github.com/error-four-o-four/unicode-range",
 	"repository": {
 		"type": "git",
-		"url": "https://https://github.com/error-four-o-four/unicode-range.git"
+		"url": "https://github.com/error-four-o-four/unicode-range.git"
 	},
 	"bugs": {
-		"url": "https://https://github.com/error-four-o-four/unicode-range/issues"
+		"url": "https://github.com/error-four-o-four/unicode-range/issues"
 	},
   "license": "MIT",
   "author": "error-four-o-four",
