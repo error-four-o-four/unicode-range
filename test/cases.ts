@@ -159,6 +159,13 @@ export const invalidCases = {
     'U+00FF??-0099??',
   ],
 
+  'multiple strings': [
+    'U+F, Invalid',
+    ['U+F', NaN],
+    'U+F, U+00FF-0099, U+00FF??-0099??',
+    ['U+F', 'U+00FF-0099', 'U+00FF??-0099??'],
+  ],
+
   'single codepoint number': [
     [-Infinity],
     [Infinity],

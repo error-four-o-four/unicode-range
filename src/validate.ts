@@ -28,10 +28,11 @@ export const isValidUnicodeRange = (input: unknown): boolean => {
 
     try {
       parseIntervalRange(start, end);
-    } catch (error) {
-      if (error instanceof TypeError) return false;
-
-      throw error;
+    } catch (error) { // eslint-disable-line @typescript-eslint/no-unused-vars
+      return false;
+      // @todo
+      // if (error instanceof TypeError) return false;
+      // throw error;
     }
   }
 
