@@ -52,7 +52,7 @@ The package includes the functions `parseUnicodeRangeSafe` and `stringifyUnicode
 
 The function `isValidUnicodeRange` returns a boolean indicating whether the input is a valid unicode-range string.
 
-The `parseUnicodeRange` function accepts a single string argument, which may contain multiple values (e.g., 'U+0, U+9'). By default, it returns a deduplicated and sorted array of code points. To disable sorting and improve performance, an optional boolean can be provided as the second argument.
+The `parseUnicodeRange` function accepts a single string argument, which may contain multiple comma-separated values (e.g., 'U+0, U+9'). By default, it returns a deduplicated and sorted array of code points. To disable sorting and improve performance, an optional boolean can be provided as the second argument.
 
 ```js
 UnicodeRange.parse('U+99-9F, U+41-96');
@@ -78,7 +78,7 @@ console.log(Hiragana);
 const DigitCodePoints = '0123456789'.split('').map(c => c.codePointAt(0));
 const DigitUnicodeRange = UnicodeRange.stringify(DigitCodePoints);
 
-console.log(NumericUnicodeRange);
+console.log(DigitUnicodeRange);
 ```
 
 ## Benchmark
