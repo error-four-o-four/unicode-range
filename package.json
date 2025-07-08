@@ -1,6 +1,6 @@
 {
   "name": "@http404/unicode-range",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Unicode-range parser/builder",
   "keywords": [
     "css",
