@@ -4,6 +4,6 @@ import '../../src/global.js';
 
 describe('the package', () => {
   it('provides a global object', () => {
-    expect(UnicodeParser).toBeDefined();
+    expect(UnicodeRange).toBeDefined();
   });
 });

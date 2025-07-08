@@ -1,9 +1,9 @@
 import parser from './index.js';
 
 declare global {
-  var UnicodeParser: typeof parser;
+  var UnicodeRange: typeof parser;
 }
 
-globalThis.UnicodeParser = parser;
+globalThis.UnicodeRange = parser;
 
 export {};
