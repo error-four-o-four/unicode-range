@@ -6,9 +6,9 @@ import pkg from './package.json' with { type: 'json' };
 import tsc from './tsconfig.json' with { type: 'json' };
 
 // final output dir
-const dir = `./${pkg.files[0]}`;
+export const dir = `./${pkg.files[0]}`;
 // temporary output dir of emitted files
-const tscDir = tsc.compilerOptions.outDir;
+export const tscDir = tsc.compilerOptions.outDir;
 
 // get entrypoints from package.json
 const input = Object
