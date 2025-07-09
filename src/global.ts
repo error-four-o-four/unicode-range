@@ -4,6 +4,6 @@ declare global {
   var UnicodeRange: typeof parser;
 }
 
-globalThis.UnicodeRange = parser;
+globalThis.UnicodeRange ??= parser;
 
 export {};
