@@ -3,10 +3,8 @@ import { fileURLToPath } from 'url';
 
 import resultsParse from '../test/bench/parse.json' with { type: 'json' };
 
-// console.log(resultsParse[0]);
-
-const readmeFile = fileURLToPath(new URL('../README.md', import.meta.url));
-const readmeText = (await readFile(readmeFile, 'utf8')).split('\n').map(line => line.trim());
+const featuresFile = fileURLToPath(new URL('../docs/features.md', import.meta.url));
+const featuresText = (await readFile(featuresFile, 'utf8')).split('\n').map(line => line.trim());
 
 type BenchResult = (typeof resultsParse)[number];
 
@@ -77,16 +75,16 @@ const getIndices = (lines: string[], search: string): [number, number] | undefin
 // main
 
 const tablesParse = resultsParse.map(result => createTableLines(result)).flat();
-const indicesParse = getIndices(readmeText, 'parse');
+const indicesParse = getIndices(featuresText, 'parse');
 
 if (!indicesParse) {
   throw Error('Nope');
 }
 
 const content = [
-  ...readmeText.slice(0, indicesParse[0] + 1),
+  ...featuresText.slice(0, indicesParse[0] + 1),
   ...tablesParse,
-  ...readmeText.slice(indicesParse[1]),
+  ...featuresText.slice(indicesParse[1]),
 ].join('\n');
 
-await writeFile(readmeFile, content, 'utf8');
+await writeFile(featuresFile, content, 'utf8');
